@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  :host {
+    font-family: "Roboto", sans-serif;
+  }
+  body {
+    @apply bg-white text-gray-900 transition-colors duration-200 dark:bg-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  .section-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400;
+  }
+}
+
+.swiper-slide {
+  height: auto !important;
+}
