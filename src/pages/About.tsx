@@ -39,7 +39,7 @@ export function About() {
               </div>
             </div>
           </div>
-          <div className="aspect-square order-2 md:order-2 bg-gray-200 dark:bg-gray-800 bg-opacity-10 backdrop-blur-md rounded-lg">
+          <div className="aspect-square order-1 md:order-2 bg-gray-200 dark:bg-gray-800 bg-opacity-10 backdrop-blur-md rounded-lg">
             <Image
               src="/assets/images/piti.webp"
               alt="Petrit Halabaku"
