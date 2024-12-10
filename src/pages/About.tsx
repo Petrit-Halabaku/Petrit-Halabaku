@@ -41,7 +41,7 @@ export function About() {
           </div>
           <div className="aspect-square bg-gray-200 dark:bg-gray-800 bg-opacity-10 backdrop-blur-md rounded-lg">
             <Image
-              src="/assets/images/piti.png"
+              src="/assets/images/piti.webp"
               alt="Petrit Halabaku"
               className="w-full h-full object-contain"
             />
