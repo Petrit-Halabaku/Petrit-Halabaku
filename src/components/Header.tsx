@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, Candy } from "lucide-react";
-// import { ThemeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { scrollToSection } from "./ScrollToSection";
 
 export function Header() {
@@ -51,7 +51,7 @@ export function Header() {
                 {item}
               </Link>
             ))}
-            {/* <ThemeToggle /> */}
+            <ThemeToggle />
           </nav>
 
           <button
@@ -82,7 +82,9 @@ export function Header() {
                 {item}
               </Link>
             ))}
-            <div className="px-4 py-2">{/* <ThemeToggle /> */}</div>
+            <div className="px-4 py-2">
+              <ThemeToggle />
+            </div>
           </motion.nav>
         )}
       </div>
