@@ -10,7 +10,7 @@ export function About() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="order-2 md:order-1">
             <h2 className="text-3xl font-bold mb-6 dark:text-gray-100">
               About Me
             </h2>
@@ -39,7 +39,7 @@ export function About() {
               </div>
             </div>
           </div>
-          <div className="aspect-square bg-gray-200 dark:bg-gray-800 bg-opacity-10 backdrop-blur-md rounded-lg">
+          <div className="aspect-square order-2 md:order-2 bg-gray-200 dark:bg-gray-800 bg-opacity-10 backdrop-blur-md rounded-lg">
             <Image
               src="/assets/images/piti.webp"
               alt="Petrit Halabaku"
