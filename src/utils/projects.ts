@@ -1,0 +1,56 @@
+import { Project } from "../types";
+
+export const projects: Project[] = [
+  {
+    title: "Gjirafa Mall Homepage",
+    description: "A full-stack web application with modern features",
+    image: "assets/images/gjirafamall.png",
+    tech: ["React", "TailwindCSS", "JavaScript", ".Net"],
+    category: "Full Stack",
+    // github: "https://github.com",
+    live: "https://gjirafamall.com/",
+  },
+  {
+    title: "Health Data App",
+    description: "A health related data crunch app to show stats for multiple datapoints",
+    image: "assets/images/data-hub.png",
+    tech: ["React", "TailwindCSS", "JavaScript"],
+    category: "Full Stack",
+    // github: "https://github.com",
+    live: "https://healthdataapp.netlify.app/",
+  },
+  {
+    title: "Gjirafa50 Product Page",
+    description: "A full-stack web application with modern features",
+    image: "assets/images/gjirafa50.png",
+    tech: ["React", "TailwindCSS", "JavaScript", ".Net"],
+    category: "Full Stack",
+    // github: "https://github.com",
+    live: "https://gjirafa50.com/laptop-lenovo-loq-15arp9-156-amd-ryzen-7-7435hs-16gb-ram-512gb-ssd-nvidia-geforce-rtx-4070-i-hirte?utm_source=rec-product&utm_medium=homepage&utm_campaign=homepage-featured-products",
+  },
+  {
+    title: "NDB Technology Website",
+    description: "Modern depleated radiaoctive battery platform",
+    image: "assets/images/ndb.png",
+    tech: ["React.js", "Gatsby.js", "MongoDB", "Mobile"],
+    category: "Full Stack",
+    // github: "https://github.com",
+    live: "https://ndb.technology/",
+  },
+  {
+    title: "Gjirafa Mall Gift Card",
+    description: "Mobile-first responsive gift card page",
+    image: "assets/images/giftcard.png",
+    tech: ["React.js", ".Net", "TailwindCSS"],
+    category: "Mobile",
+    live: "https://gjirafamall.com/gift-card",
+  },
+  // {
+  //   title: "DCoding Labs Website",
+  //   description: "",
+  //   image: "assets/images/dcodinglabs.png",
+  //   tech: ["React", "Tailwind", "Mobile"],
+  //   category: "Frontend",
+  //   live: "hhttps://www.dcodinglabs.com/",
+  // },
+];

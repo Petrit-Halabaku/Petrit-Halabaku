@@ -5,6 +5,7 @@
 @layer base {
   html,
   :host {
+    font-size:18px;
     font-family: "Roboto", sans-serif;
   }
   body {
