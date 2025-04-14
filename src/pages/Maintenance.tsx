@@ -71,7 +71,7 @@
 import { motion } from "framer-motion";
 import { Construction, Wrench } from "lucide-react";
 
-export default function UnderConstruction() {
+export default function Maintenance() {
   const container = {
     hidden: { opacity: 0 },
     show: {
