@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { EDUCATION, formatEducationPeriod } from '@/src/data/education'
 import { EXPERIENCES, SKILLS } from '@/src/data/experiences'
 
 const chipStyle: React.CSSProperties = {
@@ -121,11 +122,34 @@ export default function ExperiencePage() {
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 2, display: 'flex', alignItems: 'center', gap: 6 }}>
             <span style={{ color: 'var(--text-3)' }}>//</span> education
           </div>
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: 16 }}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 2 }}>BSc Computer Science</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--cyan)', marginBottom: 4 }}>University of Prishtina</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)' }}>2014 – 2018</div>
-          </div>
+          {EDUCATION.map((edu, i) => (
+            <div
+              key={`${edu.institution}-${edu.periodFrom}-${edu.periodTo}`}
+              style={{
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: 10,
+                padding: 16,
+                marginBottom: i < EDUCATION.length - 1 ? 10 : 0,
+              }}
+            >
+              <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 2 }}>{edu.degree}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--cyan)', marginBottom: 4 }}>{edu.institution}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)' }}>
+                {[formatEducationPeriod(edu), edu.location].filter(Boolean).join(' · ')}
+              </div>
+              {edu.details?.length ? (
+                <ul style={{ listStyle: 'none', marginTop: 10, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  {edu.details.map((d, j) => (
+                    <li key={j} style={{ fontSize: 12, color: 'var(--text-2)', lineHeight: 1.6, paddingLeft: 12, position: 'relative' }}>
+                      <span style={{ position: 'absolute', left: 0, color: 'var(--text-3)' }}>›</span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ))}
 
           <div style={{ height: 1, background: 'var(--border)', margin: '8px 0' }} />
 
