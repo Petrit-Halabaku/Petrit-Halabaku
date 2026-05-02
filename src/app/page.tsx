@@ -94,7 +94,7 @@ export default function HomePage() {
               className="fade-up delay-2"
               style={{ fontSize: 14, lineHeight: 1.85, color: 'var(--text-2)', maxWidth: 500, marginBottom: 28 }}
             >
-              Full Stack Engineer with 6+ years building secure, scalable systems across e-commerce, health data, and deep tech. I ship products that matter with teams that care.
+              Senior Frontend Engineer with 7+ years of experience building secure, scalable systems across e-commerce, health data, and deep tech. I ship products that matter with teams that care.
             </p>
             <Link
               href="/experience"
