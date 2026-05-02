@@ -253,7 +253,7 @@ export default function HomePage() {
               onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
             >
               {[
-                { num: '6', em: '+', desc: 'years experience' },
+                { num: '7', em: '+', desc: 'years experience' },
                 { num: '6', em: '+', desc: 'shipped projects' },
                 { num: '4', em: '', desc: 'companies' },
               ].map(({ num, em, desc }, i, arr) => (
