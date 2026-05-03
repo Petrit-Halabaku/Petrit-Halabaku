@@ -97,6 +97,83 @@
   .leaflet-tile {
     filter: brightness(0.82) saturate(0.75);
   }
+
+  /* react-activity-calendar — HUD tooltip aligned with bento / CursorGlow palette */
+  .react-activity-calendar__tooltip {
+    white-space: pre-line;
+    z-index: 20000 !important;
+
+    width: max-content !important;
+    max-width: min(calc(100vw - 20px), 15rem);
+
+    padding: 0.5rem 0.72rem !important;
+    border-radius: 10px !important;
+
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.52;
+    letter-spacing: 0.04em;
+
+    color: var(--color-text-main) !important;
+    border: 1px solid
+      color-mix(in srgb, var(--color-border-hover) 88%, var(--color-cyan-brand) 28%) !important;
+    background-color: color-mix(
+      in srgb,
+      var(--color-surface-2) 96%,
+      var(--color-surface)
+    ) !important;
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+
+    box-shadow:
+      0 0 0 1px rgba(0, 212, 255, 0.1),
+      0 0 24px rgba(0, 212, 255, 0.06),
+      0 16px 42px rgba(7, 9, 13, 0.55),
+      inset 0 1px 0 rgba(220, 230, 245, 0.07),
+      inset 0 -1px 0 rgba(0, 229, 123, 0.05);
+
+    isolation: isolate;
+  }
+
+  /* Calendar uses colorScheme="dark"; library inverts tooltip to paper-white — revert to themed dark HUD */
+  .react-activity-calendar__tooltip[data-color-scheme='dark'] {
+    color: var(--color-text-main) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--color-border-hover) 88%,
+        var(--color-cyan-brand) 28%
+      )
+      !important;
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-2) 96%,
+        var(--color-surface)
+      )
+      !important;
+  }
+
+  .react-activity-calendar__tooltip[data-color-scheme='light'] {
+    color: var(--color-text-main) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--color-border-hover) 88%,
+        var(--color-cyan-brand) 28%
+      )
+      !important;
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-2) 96%,
+        var(--color-surface)
+      )
+      !important;
+  }
+
+  .react-activity-calendar__tooltip-arrow,
+  .react-activity-calendar__tooltip[data-color-scheme='dark'] .react-activity-calendar__tooltip-arrow,
+  .react-activity-calendar__tooltip[data-color-scheme='light'] .react-activity-calendar__tooltip-arrow {
+    fill: var(--color-surface-2) !important;
+  }
 }
 
 @keyframes fadeUp {
