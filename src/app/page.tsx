@@ -4,11 +4,11 @@ import { useRef, useEffect, useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
-import ContribGraph from '@/src/components/ContribGraph'
 import ProjectRow from '@/src/components/ProjectRow'
 import { PROJECTS } from '@/src/data/projects'
 
 const LeafletMap = dynamic(() => import('@/src/components/LeafletMap'), { ssr: false })
+const ContribGraph = dynamic(() => import('@/src/components/ContribGraph'), { ssr: false })
 
 
 export default function HomePage() {
