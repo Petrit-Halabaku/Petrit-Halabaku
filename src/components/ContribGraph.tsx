@@ -24,46 +24,36 @@ const ContribGraph = memo(function ContribGraph() {
 
   return (
     <div>
-      <div style={{ position: 'relative', height: 14, marginBottom: 4 }}>
+      <div className="relative mb-1 h-3.5">
         {monthLabels.map(({ w, label }) => (
           <span
             key={w}
-            style={{
-              position: 'absolute',
-              left: w * 13,
-              fontFamily: 'var(--font-mono)',
-              fontSize: 9,
-              color: 'var(--text-3)',
-            }}
+            className="absolute font-mono text-[9px] text-text-subtle"
+            style={{ left: w * 13 }}
           >
             {label}
           </span>
         ))}
       </div>
-      <div style={{ display: 'flex', gap: 2 }}>
+      <div className="flex gap-0.5">
         {Array.from({ length: 52 }, (_, w) => (
-          <div key={w} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <div key={w} className="flex flex-col gap-0.5">
             {Array.from({ length: 7 }, (_, d) => (
               <div
                 key={d}
-                style={{
-                  width: 11,
-                  height: 11,
-                  borderRadius: 2,
-                  background: CONTRIB_COLORS[CONTRIB_DATA[w * 7 + d]],
-                  flexShrink: 0,
-                }}
+                className="h-[11px] w-[11px] shrink-0 rounded-sm"
+                style={{ background: CONTRIB_COLORS[CONTRIB_DATA[w * 7 + d]] }}
               />
             ))}
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 8, justifyContent: 'flex-end' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-3)' }}>Less</span>
+      <div className="mt-2 flex items-center justify-end gap-1">
+        <span className="font-mono text-[9px] text-text-subtle">Less</span>
         {CONTRIB_COLORS.map((c, i) => (
-          <div key={i} style={{ width: 10, height: 10, borderRadius: 2, background: c }} />
+          <div key={i} className="h-2.5 w-2.5 rounded-sm" style={{ background: c }} />
         ))}
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-3)' }}>More</span>
+        <span className="font-mono text-[9px] text-text-subtle">More</span>
       </div>
     </div>
   )

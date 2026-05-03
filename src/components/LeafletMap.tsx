@@ -49,9 +49,6 @@ export default function LeafletMap() {
   }, [])
 
   return (
-    <div
-      ref={containerRef}
-      style={{ width: '100%', height: 180, borderRadius: 12 }}
-    />
+    <div ref={containerRef} className="h-[180px] w-full rounded-xl" />
   )
 }

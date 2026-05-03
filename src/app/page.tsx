@@ -44,101 +44,51 @@ export default function HomePage() {
       {/* Mouse-follow project preview */}
       <div
         ref={previewRef}
-        style={{
-          position: 'fixed',
-          zIndex: 9999,
-          pointerEvents: 'none',
-          borderRadius: 8,
-          overflow: 'hidden',
-          border: '1px solid var(--border-hover)',
-          boxShadow: '0 8px 36px rgba(0,0,0,0.6)',
-          width: 260,
-          height: 148,
-          display: 'none',
-        }}
-        className="mouse-preview"
+        className="mouse-preview pointer-events-none fixed z-[9999] hidden h-[148px] w-[260px] overflow-hidden rounded-lg border border-border-hover shadow-[0_8px_36px_rgba(0,0,0,0.6)]"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={previewImgRef}
           src={undefined}
           alt=""
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          className="block h-full w-full object-cover"
         />
       </div>
 
-      <main style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
+      <main className="relative z-[1] mx-auto max-w-max-page px-6 pb-20">
 
         {/* HERO */}
-        <section className="fade-up" style={{ padding: '64px 0 0', display: 'grid', gridTemplateColumns: '1fr 200px', gap: 40, alignItems: 'start' }}>
+        <section className="animate-fade-up grid grid-cols-[1fr_200px] items-start gap-10 pt-16 max-sm:grid-cols-1 max-sm:pt-10">
           <div>
-            <div
-              className="fade-up"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}
-            >
-              <span style={{ color: 'var(--text-3)' }}>//</span> full stack engineer
+            <div className="animate-fade-up mb-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+              <span className="text-text-subtle">//</span> full stack engineer
             </div>
-            <h1
-              className="fade-up delay-1"
-              style={{ fontSize: 'clamp(34px,5.5vw,52px)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.08, color: 'var(--text)', marginBottom: 6 }}
-            >
+            <h1 className="animate-fade-up [animation-delay:0.1s] mb-1.5 text-[clamp(34px,5.5vw,52px)] font-bold leading-[1.08] tracking-[-0.03em] text-text-main">
               Petrit<br />Halabaku
             </h1>
-            <div
-              className="fade-up delay-2"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--cyan)', marginBottom: 18, letterSpacing: '0.04em' }}
-            >
-              React · Node.js · TypeScript<span style={{ animation: 'blink 1.1s step-end infinite' }}>_</span>
+            <div className="animate-fade-up [animation-delay:0.2s] mb-[18px] font-mono text-xs tracking-[0.04em] text-cyan-brand">
+              React · Node.js · TypeScript<span className="animate-blink">_</span>
             </div>
-            <p
-              className="fade-up delay-2"
-              style={{ fontSize: 14, lineHeight: 1.85, color: 'var(--text-2)', maxWidth: 500, marginBottom: 28 }}
-            >
+            <p className="animate-fade-up [animation-delay:0.2s] mb-7 max-w-[500px] text-sm leading-[1.85] text-text-muted">
               Senior Frontend Engineer with 7+ years of experience building secure, scalable systems across e-commerce, health data, and deep tech. I ship products that matter with teams that care.
             </p>
             <Link
               href="/experience"
-              className="fade-up delay-3 available-badge"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                border: '1px solid rgba(0,229,123,0.3)',
-                borderRadius: 100,
-                padding: '6px 14px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: 11,
-                color: 'var(--green)',
-                textDecoration: 'none',
-                background: 'var(--green-dim)',
-                transition: 'box-shadow 0.3s, border-color 0.3s',
-              }}
+              className="animate-fade-up [animation-delay:0.3s] available-badge inline-flex items-center gap-2 rounded-full border border-[rgba(0,229,123,0.3)] bg-green-dim px-3.5 py-1.5 font-mono text-[11px] text-green-brand no-underline transition-[box-shadow,border-color] duration-300"
             >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', animation: 'pulse-dot 2s ease-in-out infinite', flexShrink: 0, display: 'block' }} />
+              <span className="animate-pulse-dot block h-1.5 w-1.5 shrink-0 rounded-full bg-green-brand" />
               Available for work
             </Link>
           </div>
-          <div
-            className="fade-up delay-2 profile-wrap-desktop"
-            style={{ position: 'relative', width: 180 }}
-          >
-            <div
-              style={{
-                width: 170,
-                height: 200,
-                borderRadius: 14,
-                overflow: 'hidden',
-                border: '1px solid var(--border)',
-                background: 'var(--surface)',
-              }}
-            >
+          <div className="animate-fade-up [animation-delay:0.2s] profile-wrap-desktop relative w-[180px] max-sm:hidden">
+            <div className="h-[200px] w-[170px] overflow-hidden rounded-[14px] border border-border bg-surface">
               <Image
                 src="/uploads/piti.png"
                 alt="Petrit Halabaku"
                 width={170}
                 height={200}
                 priority
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                className="h-full w-full object-cover object-[center_top]"
               />
             </div>
             {/* Corner accents */}
@@ -150,75 +100,52 @@ export default function HomePage() {
             ].map((c, i) => (
               <div
                 key={i}
-                style={{ position: 'absolute', width: 11, height: 11, borderColor: 'var(--cyan)', borderStyle: 'solid', ...c.style }}
+                className="absolute h-[11px] w-[11px] border-solid border-cyan-brand"
+                style={c.style}
               />
             ))}
           </div>
         </section>
 
         {/* BENTO */}
-        <div className="fade-up delay-3 bento-wrap-outer" style={{ position: 'relative', marginTop: 40 }}>
+        <div className="animate-fade-up [animation-delay:0.3s] bento-wrap-outer relative mt-10">
           <div
             ref={bentoRef}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}
-            className="bento-grid"
+            className="bento-grid grid grid-cols-4 gap-2.5 max-sm:grid-cols-2"
           >
             {/* LinkedIn */}
-            <div
-              style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                borderRadius: 12,
-                padding: 20,
-                gridColumn: 'span 1',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                minHeight: 130,
-                transition: 'border-color 0.25s',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
-            >
+            <div className="col-span-1 flex min-h-[130px] flex-col justify-between rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover">
               <div>
-                <div style={{ width: 34, height: 34, borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+                <div className="mb-3 flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border bg-surface-2">
                   <svg viewBox="0 0 24 24" fill="#0a78c8" width="18" height="18">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                     <rect x="2" y="9" width="4" height="12" />
                     <circle cx="4" cy="4" r="2" />
                   </svg>
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-2)', marginBottom: 10 }}>@petrit-halabaku</div>
+                <div className="mb-2.5 font-mono text-[10px] text-text-muted">@petrit-halabaku</div>
               </div>
               <a
                 href="https://linkedin.com/in/petrit-halabaku"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 6, padding: '6px 12px', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text)', textDecoration: 'none', transition: 'border-color 0.2s, color 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--cyan)'; e.currentTarget.style.color = 'var(--cyan)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text)' }}
+                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-border bg-surface-2 px-3 py-1.5 font-mono text-[11px] text-text-main no-underline transition-colors hover:border-cyan-brand hover:text-cyan-brand"
               >
                 Connect →
               </a>
             </div>
 
             {/* GitHub graph */}
-            <div
-              style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 20, gridColumn: 'span 3', display: 'flex', flexDirection: 'column', gap: 10, transition: 'border-color 0.25s' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span style={{ color: 'var(--text-3)' }}>//</span> github contributions
+            <div className="col-span-3 flex flex-col gap-2.5 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover max-sm:col-span-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+                  <span className="text-text-subtle">//</span> github contributions
                 </div>
                 <a
                   href="https://github.com/Petrit-Halabaku"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)', textDecoration: 'none', transition: 'color 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-3)')}
+                  className="font-mono text-[10px] text-text-subtle no-underline transition-colors hover:text-cyan-brand"
                 >
                   @Petrit-Halabaku ↗
                 </a>
@@ -227,66 +154,48 @@ export default function HomePage() {
             </div>
 
             {/* Leaflet map */}
-            <div
-              style={{ gridColumn: 'span 3', overflow: 'hidden', padding: 0, minHeight: 180, borderRadius: 12, border: '1px solid var(--border)', transition: 'border-color 0.2s', position: 'relative' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
-            >
+            <div className="relative col-span-3 min-h-[180px] overflow-hidden rounded-xl border border-border transition-colors hover:border-border-hover max-sm:col-span-2">
               <LeafletMap />
             </div>
 
             {/* Location */}
-            <div
-              style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 20, gridColumn: 'span 1', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 8, transition: 'border-color 0.25s' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
-            >
-              <div style={{ fontSize: 26, lineHeight: 1 }}>🇽🇰</div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>Prishtina</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-2)' }}>Kosovo · Remote OK</div>
+            <div className="col-span-1 flex flex-col justify-center gap-2 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover">
+              <div className="text-[26px] leading-none">🇽🇰</div>
+              <div className="text-sm font-semibold text-text-main">Prishtina</div>
+              <div className="font-mono text-[10px] text-text-muted">Kosovo · Remote OK</div>
             </div>
 
             {/* Stats */}
-            <div
-              style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, gridColumn: 'span 4', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', transition: 'border-color 0.25s' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
-            >
+            <div className="col-span-4 grid grid-cols-3 rounded-xl border border-border bg-surface transition-colors hover:border-border-hover max-sm:col-span-2">
               {[
                 { num: '7', em: '+', desc: 'years experience' },
                 { num: '6', em: '+', desc: 'shipped projects' },
                 { num: '4', em: '', desc: 'companies' },
-              ].map(({ num, em, desc }, i, arr) => (
-                <div key={desc} style={{ padding: '16px 20px', borderRight: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 26, fontWeight: 600, color: 'var(--text)', lineHeight: 1 }}>
-                    {num}<em style={{ color: 'var(--cyan)', fontStyle: 'normal' }}>{em}</em>
+              ].map(({ num, em, desc }) => (
+                <div key={desc} className="px-5 py-4 border-r border-border last:border-r-0">
+                  <div className="font-mono text-[26px] font-semibold leading-none text-text-main">
+                    {num}<em className="not-italic text-cyan-brand">{em}</em>
                   </div>
-                  <div style={{ fontSize: 11, color: 'var(--text-2)', marginTop: 4 }}>{desc}</div>
+                  <div className="mt-1 text-[11px] text-text-muted">{desc}</div>
                 </div>
               ))}
             </div>
 
             {/* GitHub */}
-            <div
-              style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 20, gridColumn: 'span 1', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 130, transition: 'border-color 0.25s' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
-            >
+            <div className="col-span-1 flex min-h-[130px] flex-col justify-between rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover">
               <div>
-                <div style={{ width: 34, height: 34, borderRadius: 8, background: 'var(--surface-2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+                <div className="mb-3 flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border bg-surface-2">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" width="18" height="18">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                   </svg>
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-2)', marginBottom: 10 }}>@Petrit-Halabaku</div>
+                <div className="mb-2.5 font-mono text-[10px] text-text-muted">@Petrit-Halabaku</div>
               </div>
               <a
                 href="https://github.com/Petrit-Halabaku"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 6, padding: '6px 12px', fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text)', textDecoration: 'none', transition: 'border-color 0.2s, color 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--cyan)'; e.currentTarget.style.color = 'var(--cyan)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text)' }}
+                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-border bg-surface-2 px-3 py-1.5 font-mono text-[11px] text-text-main no-underline transition-colors hover:border-cyan-brand hover:text-cyan-brand"
               >
                 Follow →
               </a>
@@ -295,24 +204,22 @@ export default function HomePage() {
         </div>
 
         {/* PROJECTS */}
-        <section className="fade-up delay-4" style={{ marginTop: 56 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
+        <section className="animate-fade-up [animation-delay:0.45s] mt-14">
+          <div className="mb-6 flex items-center justify-between">
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ color: 'var(--text-3)' }}>//</span> selected work
+              <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+                <span className="text-text-subtle">//</span> selected work
               </div>
-              <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>Projects</h2>
+              <h2 className="text-[22px] font-bold tracking-[-0.02em] text-text-main">Projects</h2>
             </div>
             <Link
               href="/projects"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-2)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 5, transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-2)')}
+              className="flex items-center gap-1.5 font-mono text-[11px] text-text-muted no-underline transition-colors hover:text-cyan-brand"
             >
               view all <span>→</span>
             </Link>
           </div>
-          <div style={{ borderBottom: '1px solid var(--border)' }}>
+          <div className="border-b border-border">
             {PROJECTS.map(p => (
               <ProjectRow key={p.id} project={p} previewRef={previewRef} previewImgRef={previewImgRef} />
             ))}
@@ -320,53 +227,18 @@ export default function HomePage() {
         </section>
 
         {/* CTA */}
-        <div
-          className="fade-up delay-4"
-          style={{
-            marginTop: 56,
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            borderRadius: 14,
-            padding: '32px 28px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 24,
-            flexWrap: 'wrap',
-          }}
-        >
+        <div className="animate-fade-up [animation-delay:0.45s] mt-14 flex flex-wrap items-center justify-between gap-6 rounded-[14px] border border-border bg-surface px-7 py-8">
           <div>
-            <div style={{ fontSize: 19, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', marginBottom: 4 }}>
+            <div className="mb-1 text-[19px] font-bold tracking-[-0.02em] text-text-main">
               Let&apos;s build something great.
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text-2)' }}>Open to full-time roles and freelance projects.</div>
+            <div className="text-[13px] text-text-muted">Open to full-time roles and freelance projects.</div>
           </div>
           <a
             href="https://linkedin.com/in/petrit-halabaku"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              background: 'var(--cyan-dim)',
-              border: '1px solid rgba(0,212,255,0.25)',
-              borderRadius: 8,
-              padding: '10px 22px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 12,
-              color: 'var(--cyan)',
-              textDecoration: 'none',
-              transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
-              whiteSpace: 'nowrap',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(0,212,255,0.14)'
-              e.currentTarget.style.borderColor = 'rgba(0,212,255,0.45)'
-              e.currentTarget.style.boxShadow = '0 0 18px rgba(0,212,255,0.12)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'var(--cyan-dim)'
-              e.currentTarget.style.borderColor = 'rgba(0,212,255,0.25)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
+            className="whitespace-nowrap rounded-lg border border-[rgba(0,212,255,0.25)] bg-cyan-dim px-[22px] py-2.5 font-mono text-xs text-cyan-brand no-underline transition-[background,border-color,box-shadow] duration-200 hover:border-[rgba(0,212,255,0.45)] hover:bg-[rgba(0,212,255,0.14)] hover:shadow-[0_0_18px_rgba(0,212,255,0.12)]"
           >
             Get in touch →
           </a>
@@ -375,18 +247,6 @@ export default function HomePage() {
 
       <style>{`
         .mouse-preview.visible { display: block !important; }
-        @media (max-width: 640px) {
-          section[style*="grid-template-columns: 1fr 200px"] {
-            grid-template-columns: 1fr !important;
-            padding-top: 40px !important;
-          }
-          .profile-wrap-desktop { display: none !important; }
-          .bento-brace-desktop { display: none !important; }
-          .bento-grid { grid-template-columns: 1fr 1fr !important; }
-          .bento-grid > *[style*="span 3"],
-          .bento-grid > *[style*="span 4"] { grid-column: span 2 !important; }
-          .bento-grid > *[style*="span 1"] { grid-column: span 1 !important; }
-        }
       `}</style>
     </>
   )

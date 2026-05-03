@@ -1,78 +1,136 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #07090d;
-  --surface: #0d1117;
-  --surface-2: #131921;
-  --border: #1c2332;
-  --border-hover: #2a3550;
-  --text: #dce6f5;
-  --text-2: #7a8ba8;
-  --text-3: #3d4f6a;
-  --cyan: #00d4ff;
-  --cyan-dim: rgba(0, 212, 255, 0.08);
-  --cyan-glow: rgba(0, 212, 255, 0.2);
-  --green: #00e57b;
-  --green-dim: rgba(0, 229, 123, 0.1);
-  --max-w: 900px;
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@theme {
+  --color-bg: #07090d;
+  --color-surface: #0d1117;
+  --color-surface-2: #131921;
+  --color-border: #1c2332;
+  --color-border-hover: #2a3550;
 
-html { scroll-behavior: smooth; }
+  --color-text-main: #dce6f5;
+  --color-text-muted: #7a8ba8;
+  --color-text-subtle: #3d4f6a;
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
+  --color-cyan-brand: #00d4ff;
+  --color-cyan-dim: rgba(0, 212, 255, 0.08);
+  --color-cyan-glow: rgba(0, 212, 255, 0.2);
+
+  --color-green-brand: #00e57b;
+  --color-green-dim: rgba(0, 229, 123, 0.1);
+
+  --spacing-max-page: 900px;
+
+  --animate-fade-up: fadeUp 0.5s ease both;
+  --animate-blink: blink 1s infinite;
+  --animate-pulse-dot: pulse-dot 1.4s ease-in-out infinite;
 }
 
-/* Dot-grid background */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, #1c2840 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, #1c2840 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      transparent 50%,
+      rgba(7, 9, 13, 0.7) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  ::selection {
+    background: var(--color-cyan-glow);
+    color: var(--color-cyan-brand);
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-hover);
+    border-radius: 2px;
+  }
 }
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(7, 9, 13, 0.7) 100%);
-  pointer-events: none;
-  z-index: 0;
+
+@layer components {
+  .leaflet-tile {
+    filter: brightness(0.82) saturate(0.75);
+  }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 2px; }
-::selection { background: var(--cyan-glow); color: var(--cyan); }
-
-/* Leaflet override */
-.leaflet-tile { filter: brightness(0.82) saturate(0.75); }
-
-/* Animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.5); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.fade-up { animation: fadeUp 0.5s ease both; }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.45s; }
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+}
