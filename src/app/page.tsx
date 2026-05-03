@@ -229,15 +229,13 @@ export default function HomePage() {
               Let&apos;s build something great.
             </div>
             <div className="text-[13px] text-text-muted">Open to full-time roles and freelance projects.</div>
-          </div>
-          <a
-            href="https://linkedin.com/in/petrit-halabaku"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>  
+          <Link
+            href="/contact"
             className="whitespace-nowrap rounded-lg border border-[rgba(0,212,255,0.25)] bg-cyan-dim px-[22px] py-2.5 font-mono text-xs text-cyan-brand no-underline transition-[background,border-color,box-shadow] duration-200 hover:border-[rgba(0,212,255,0.45)] hover:bg-[rgba(0,212,255,0.14)] hover:shadow-[0_0_18px_rgba(0,212,255,0.12)]"
           >
             Get in touch →
-          </a>
+          </Link>
         </div>
       </main>
 
