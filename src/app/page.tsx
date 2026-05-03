@@ -1,30 +1,20 @@
 'use client'
 
-import { useRef, useEffect, useState, useCallback } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import ProjectRow from '@/src/components/ProjectRow'
 import { PROJECTS } from '@/src/data/projects'
 
-const LeafletMap = dynamic(() => import('@/src/components/LeafletMap'), { ssr: false })
+const MapboxGlobe = dynamic(() => import('@/src/components/MapboxGlobe'), { ssr: false })
 const ContribGraph = dynamic(() => import('@/src/components/ContribGraph'), { ssr: false })
 
 
 export default function HomePage() {
   const bentoRef = useRef<HTMLDivElement>(null)
-  const [bentoH, setBentoH] = useState(0)
   const previewRef = useRef<HTMLDivElement>(null)
   const previewImgRef = useRef<HTMLImageElement>(null)
-
-  useEffect(() => {
-    const measure = () => {
-      if (bentoRef.current) setBentoH(bentoRef.current.offsetHeight)
-    }
-    measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [])
 
   useEffect(() => {
     const preview = previewRef.current
@@ -153,9 +143,9 @@ export default function HomePage() {
               <ContribGraph />
             </div>
 
-            {/* Leaflet map */}
+            {/* MapLibre globe at low zoom, flat map when zoomed in */}
             <div className="relative col-span-3 min-h-[180px] overflow-hidden rounded-xl border border-border transition-colors hover:border-border-hover max-sm:col-span-2">
-              <LeafletMap />
+              <MapboxGlobe />
             </div>
 
             {/* GitHub (replaces former location tile) */}

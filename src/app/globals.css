@@ -26,8 +26,9 @@
   --spacing-max-page: 900px;
 
   --animate-fade-up: fadeUp 0.5s ease both;
-  --animate-blink: blink 1s infinite;
-  --animate-pulse-dot: pulse-dot 1.4s ease-in-out infinite;
+  --animate-blink: blink 1.1s step-end infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-badge-pulse: badge-pulse 2.2s ease-in-out infinite;
 }
 
 @layer base {
@@ -94,8 +95,14 @@
 }
 
 @layer components {
-  .leaflet-tile {
+  /* MapLibre mini map canvas — match legacy Leaflet OSM grading */
+  .mini-map-globe canvas {
     filter: brightness(0.82) saturate(0.75);
+  }
+
+  .mini-map-globe .maplibregl-canvas-container {
+    border-radius: 0.75rem;
+    overflow: hidden;
   }
 
   /* react-activity-calendar — HUD tooltip aligned with bento / CursorGlow palette */
@@ -209,5 +216,18 @@
   50% {
     opacity: 0.5;
     transform: scale(1.5);
+  }
+}
+
+@keyframes badge-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(0 229 123 / 0%);
+    border-color: rgb(0 229 123 / 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 18px 1px rgb(0 229 123 / 0.22);
+    border-color: rgb(0 229 123 / 0.52);
   }
 }

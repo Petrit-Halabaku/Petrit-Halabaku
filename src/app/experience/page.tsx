@@ -28,7 +28,7 @@ export default function ExperiencePage() {
           </Link>
         </div>
         <p className="mt-2.5 max-w-[500px] text-sm leading-[1.75] text-text-muted">
-          6+ years building products across the stack — from pixel-perfect frontends to scalable APIs. Currently leading engineering at DCoding Labs in Chicago.
+          7+ years building products across the stack — from pixel-perfect frontends to scalable APIs. Currently leading engineering at DCoding Labs in Chicago.
         </p>
       </div>
 

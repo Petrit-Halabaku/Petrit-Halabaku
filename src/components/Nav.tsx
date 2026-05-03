@@ -25,8 +25,7 @@ export default function Nav() {
             alt="PH"
             width={30}
             height={30}
-            className="w-auto opacity-90 brightness-100 "
-            // style={{ width: 'auto' }}
+            className="w-auto opacity-90 brightness-100"
           />
         </Link>
 

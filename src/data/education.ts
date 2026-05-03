@@ -20,7 +20,7 @@ export const EDUCATION: Education[] = [
     degree: "BSc Computer Science",
     institution: "University of Prishtina",
     location: "Prishtina, Kosovo",
-    periodFrom: "",
-    periodTo: "",
+    periodFrom: "2014",
+    periodTo: "2018",
   },
 ];

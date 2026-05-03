@@ -68,6 +68,7 @@ export default function ContribGraph() {
   const dayFormatter = useMemo(
     () =>
       new Intl.DateTimeFormat(undefined, {
+        timeZone: 'UTC',
         weekday: 'long',
         year: 'numeric',
         month: 'long',

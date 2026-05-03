@@ -8,8 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@types/leaflet": "^1.9.21",
-    "leaflet": "^1.9.4",
+    "@types/mapbox-gl": "^3.4.1",
+    "lucide-react": "^1.14.0",
+    "mapbox-gl": "^3.23.0",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-activity-calendar": "^3.2.0",

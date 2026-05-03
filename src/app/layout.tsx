@@ -4,6 +4,7 @@ import './globals.css'
 import Nav from '@/src/components/Nav'
 import Footer from '@/src/components/Footer'
 import CursorGlow from '@/src/components/CursorGlow'
+import UnderConstruction from '@/src/components/UnderConstruction'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -22,11 +23,13 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Petrit Halabaku — Full Stack Engineer',
   description:
-    'Full Stack Engineer with 6+ years building secure, scalable systems across e-commerce, health data, and deep tech.',
+    'Full Stack Engineer with 7+ years building secure, scalable systems across e-commerce, health data, and deep tech.',
   icons: { icon: '/uploads/logo-white.png' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true'
+
   return (
     <html
       lang="en"
@@ -34,10 +37,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="font-sans" suppressHydrationWarning>
-        <CursorGlow />
-        <Nav />
-        {children}
-        <Footer />
+        {isMaintenanceMode ? (
+          <UnderConstruction />
+        ) : (
+          <>
+            <CursorGlow />
+            <Nav />
+            {children}
+            <Footer />
+          </>
+        )}
       </body>
     </html>
   )
