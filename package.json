@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@types/mapbox-gl": "^3.4.1",
     "lucide-react": "^1.14.0",
     "mapbox-gl": "^3.23.0",
