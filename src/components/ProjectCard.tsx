@@ -36,7 +36,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           className={`pointer-events-none absolute -inset-x-1/2 -top-1/2 h-[200%] w-[200%] -translate-x-full rotate-12 bg-linear-to-r from-transparent via-[rgba(0,212,255,0.10)] to-transparent transition-transform duration-1100 ${EASE} group-hover:translate-x-0`}
         />
         <span
-          className={`absolute right-2.5 top-2.5 rounded border border-[rgba(0,212,255,0.25)] bg-[rgba(7,9,13,0.75)] px-[7px] py-[2px] font-mono text-[9px] uppercase tracking-[0.06em] text-cyan-brand backdrop-blur-md transition-[transform,border-color,background-color] duration-500 ${EASE} group-hover:-translate-y-0.5 group-hover:border-[rgba(0,212,255,0.55)] group-hover:bg-[rgba(7,9,13,0.9)]`}
+          className={`absolute right-2.5 top-2.5 rounded border border-[rgba(0,212,255,0.25)] bg-[rgba(7,9,13,0.75)] px-[7px] py-[2px] font-mono text-[9px] uppercase tracking-[0.06em] text-cyan-brand backdrop-blur-md transition-[border-color,background-color] duration-500 ${EASE} group-hover:border-[rgba(0,212,255,0.55)] group-hover:bg-[rgba(7,9,13,0.9)]`}
         >
           {project.category}
         </span>
