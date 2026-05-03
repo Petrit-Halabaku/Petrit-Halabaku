@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, type CSSProperties } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -11,6 +11,14 @@ import { getSiteFullName, splitHeroName } from '@/src/lib/site'
 const MapboxGlobe = dynamic(() => import('@/src/components/MapboxGlobe'), { ssr: false })
 const ContribGraph = dynamic(() => import('@/src/components/ContribGraph'), { ssr: false })
 
+/** Intrinsic size for `next/image` (source aspect ratio). */
+const HERO_PROFILE_IMAGE = { width: 190, height: 220 } as const
+
+/** Hero profile photo frame (display size; e.g. slightly larger than intrinsic). */
+const HERO_PROFILE_FRAME = {
+  width: HERO_PROFILE_IMAGE.width * 1.05,
+  height: HERO_PROFILE_IMAGE.height * 1.05,
+} as const
 
 export default function HomePage() {
   const siteFullName = getSiteFullName()
@@ -51,7 +59,14 @@ export default function HomePage() {
       <main className="relative z-[1] mx-auto max-w-max-page px-6 pb-20">
 
         {/* HERO */}
-        <section className="animate-fade-up grid grid-cols-[1fr_220px] items-start gap-10 pt-16 max-sm:grid-cols-1 max-sm:pt-10">
+        <section
+          className="animate-fade-up grid items-start gap-10 pt-16 max-sm:grid-cols-1 max-sm:pt-10 sm:grid-cols-[1fr_var(--hero-profile-col)]"
+          style={
+            {
+              '--hero-profile-col': `${HERO_PROFILE_FRAME.height}px`,
+            } as CSSProperties
+          }
+        >
           <div>
             <div className="animate-fade-up mb-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
               <span className="text-text-subtle">//</span> full stack engineer
@@ -81,13 +96,22 @@ export default function HomePage() {
               Available for work
             </Link>
           </div>
-          <div className="animate-fade-up [animation-delay:0.2s] profile-wrap-desktop relative w-[198px] max-sm:hidden">
-            <div className="h-[220px] w-[187px] overflow-hidden rounded-[14px] border border-border bg-surface">
+          <div
+            className="animate-fade-up [animation-delay:0.2s] profile-wrap-desktop relative max-sm:hidden"
+            style={{ width: `${HERO_PROFILE_FRAME.width}px` }}
+          >
+            <div
+              className="overflow-hidden rounded-[14px] border border-border bg-surface"
+              style={{
+                width: `${HERO_PROFILE_FRAME.width}px`,
+                height: `${HERO_PROFILE_FRAME.height}px`,
+              }}
+            >
               <Image
                 src="/uploads/piti.png"
                 alt={siteFullName || 'Profile photo'}
-                width={187}
-                height={220}
+                width={HERO_PROFILE_IMAGE.width}
+                height={HERO_PROFILE_IMAGE.height}
                 priority
                 className="h-full w-full object-cover object-[center_top]"
               />
