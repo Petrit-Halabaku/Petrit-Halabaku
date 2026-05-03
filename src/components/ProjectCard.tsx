@@ -12,7 +12,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           src={project.image}
           alt={project.title}
           loading="lazy"
-          className="proj-thumb-img block h-full w-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.04]"
+          className="proj-thumb-img block h-full w-full object-cover transition-transform duration-400 ease-out group-hover:scale-[1.04]"
         />
         <span className="absolute right-2.5 top-2.5 rounded border border-[rgba(0,212,255,0.25)] bg-[rgba(7,9,13,0.75)] px-[7px] py-[2px] font-mono text-[9px] uppercase tracking-[0.06em] text-cyan-brand backdrop-blur-md">
           {project.category}

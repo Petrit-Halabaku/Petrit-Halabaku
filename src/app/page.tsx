@@ -51,7 +51,7 @@ export default function HomePage() {
       <main className="relative z-[1] mx-auto max-w-max-page px-6 pb-20">
 
         {/* HERO */}
-        <section className="animate-fade-up grid grid-cols-[1fr_200px] items-start gap-10 pt-16 max-sm:grid-cols-1 max-sm:pt-10">
+        <section className="animate-fade-up grid grid-cols-[1fr_220px] items-start gap-10 pt-16 max-sm:grid-cols-1 max-sm:pt-10">
           <div>
             <div className="animate-fade-up mb-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
               <span className="text-text-subtle">//</span> full stack engineer
@@ -81,13 +81,13 @@ export default function HomePage() {
               Available for work
             </Link>
           </div>
-          <div className="animate-fade-up [animation-delay:0.2s] profile-wrap-desktop relative w-[180px] max-sm:hidden">
-            <div className="h-[200px] w-[170px] overflow-hidden rounded-[14px] border border-border bg-surface">
+          <div className="animate-fade-up [animation-delay:0.2s] profile-wrap-desktop relative w-[198px] max-sm:hidden">
+            <div className="h-[220px] w-[187px] overflow-hidden rounded-[14px] border border-border bg-surface">
               <Image
                 src="/uploads/piti.png"
                 alt={siteFullName || 'Profile photo'}
-                width={170}
-                height={200}
+                width={187}
+                height={220}
                 priority
                 className="h-full w-full object-cover object-[center_top]"
               />
