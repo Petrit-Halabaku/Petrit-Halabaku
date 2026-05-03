@@ -138,8 +138,8 @@ export default function HomePage() {
             ref={bentoRef}
             className="bento-grid grid grid-cols-4 gap-2.5 max-sm:grid-cols-2"
           >
-            {/* LinkedIn */}
-            <div className="col-span-1 flex min-h-[158px] flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-hover">
+            {/* LinkedIn — desktop: first narrow column; mobile: top row beside GitHub, before contributions */}
+            <div className="order-1 col-span-1 flex min-h-[158px] flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-hover sm:p-6">
               <div className="flex flex-col gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-surface-2">
                   <svg viewBox="0 0 24 24" fill="#0a78c8" width="24" height="24" aria-hidden>
@@ -160,8 +160,8 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* GitHub graph */}
-            <div className="col-span-3 flex flex-col gap-2.5 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover max-sm:col-span-2">
+            {/* GitHub graph — mobile: after social row */}
+            <div className="order-3 col-span-3 flex flex-col gap-2.5 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover max-sm:col-span-2 sm:order-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
                   <span className="text-text-subtle">//</span> github contributions
@@ -179,12 +179,12 @@ export default function HomePage() {
             </div>
 
             {/* MapLibre globe at low zoom, flat map when zoomed in */}
-            <div className="relative col-span-3 min-h-[180px] overflow-hidden rounded-xl border border-border transition-colors hover:border-border-hover max-sm:col-span-2">
+            <div className="order-4 relative col-span-3 min-h-[180px] overflow-hidden rounded-xl border border-border transition-colors hover:border-border-hover max-sm:col-span-2 sm:order-3">
               <MapboxGlobe />
             </div>
 
-            {/* GitHub (replaces former location tile) */}
-            <div className="col-span-1 flex min-h-[158px] flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-hover">
+            {/* GitHub (replaces former location tile) — mobile: top row beside LinkedIn */}
+            <div className="order-2 col-span-1 flex min-h-[158px] flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-hover sm:order-4 sm:p-6">
               <div className="flex flex-col gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-surface-2">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" width="24" height="24" aria-hidden>
