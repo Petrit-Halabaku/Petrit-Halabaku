@@ -5,6 +5,7 @@ import Nav from '@/src/components/Nav'
 import Footer from '@/src/components/Footer'
 import CursorGlow from '@/src/components/CursorGlow'
 import UnderConstruction from '@/src/components/UnderConstruction'
+import { getSiteFullName } from '@/src/lib/site'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -20,11 +21,16 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 })
 
-export const metadata: Metadata = {
-  title: 'Petrit Halabaku — Full Stack Engineer',
-  description:
-    'Full Stack Engineer with 7+ years building secure, scalable systems across e-commerce, health data, and deep tech.',
-  icons: { icon: '/uploads/logo-white.png' },
+export function generateMetadata(): Metadata {
+  const fullName = getSiteFullName()
+  return {
+    title: fullName
+      ? `${fullName} — Full Stack Engineer`
+      : 'Full Stack Engineer',
+    description:
+      'Full Stack Engineer with 7+ years building secure, scalable systems across e-commerce, health data, and deep tech.',
+    icons: { icon: '/uploads/logo-white.png' },
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

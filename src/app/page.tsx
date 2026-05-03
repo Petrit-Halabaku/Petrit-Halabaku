@@ -6,12 +6,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ProjectRow from '@/src/components/ProjectRow'
 import { PROJECTS } from '@/src/data/projects'
+import { getSiteFullName, splitHeroName } from '@/src/lib/site'
 
 const MapboxGlobe = dynamic(() => import('@/src/components/MapboxGlobe'), { ssr: false })
 const ContribGraph = dynamic(() => import('@/src/components/ContribGraph'), { ssr: false })
 
 
 export default function HomePage() {
+  const siteFullName = getSiteFullName()
+  const heroName = splitHeroName(siteFullName)
   const bentoRef = useRef<HTMLDivElement>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const previewImgRef = useRef<HTMLImageElement>(null)
@@ -54,7 +57,15 @@ export default function HomePage() {
               <span className="text-text-subtle">//</span> full stack engineer
             </div>
             <h1 className="animate-fade-up [animation-delay:0.1s] mb-1.5 text-[clamp(34px,5.5vw,52px)] font-bold leading-[1.08] tracking-[-0.03em] text-text-main">
-              Petrit<br />Halabaku
+              {heroName.line1 ? (
+                <>
+                  {heroName.line1}
+                  <br />
+                  {heroName.line2}
+                </>
+              ) : (
+                heroName.line2
+              )}
             </h1>
             <div className="animate-fade-up [animation-delay:0.2s] mb-[18px] font-mono text-xs tracking-[0.04em] text-cyan-brand">
               React · Node.js · TypeScript<span className="animate-blink">_</span>
@@ -74,7 +85,7 @@ export default function HomePage() {
             <div className="h-[200px] w-[170px] overflow-hidden rounded-[14px] border border-border bg-surface">
               <Image
                 src="/uploads/piti.png"
-                alt="Petrit Halabaku"
+                alt={siteFullName || 'Profile photo'}
                 width={170}
                 height={200}
                 priority
