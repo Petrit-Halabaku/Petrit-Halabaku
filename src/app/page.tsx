@@ -114,22 +114,22 @@ export default function HomePage() {
             className="bento-grid grid grid-cols-4 gap-2.5 max-sm:grid-cols-2"
           >
             {/* LinkedIn */}
-            <div className="col-span-1 flex min-h-[130px] flex-col justify-between rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover">
-              <div>
-                <div className="mb-3 flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border bg-surface-2">
-                  <svg viewBox="0 0 24 24" fill="#0a78c8" width="18" height="18">
+            <div className="col-span-1 flex min-h-[158px] flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-hover">
+              <div className="flex flex-col gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-surface-2">
+                  <svg viewBox="0 0 24 24" fill="#0a78c8" width="24" height="24" aria-hidden>
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                     <rect x="2" y="9" width="4" height="12" />
                     <circle cx="4" cy="4" r="2" />
                   </svg>
                 </div>
-                <div className="mb-2.5 font-mono text-[10px] text-text-muted">@petrit-halabaku</div>
+                <div className="font-mono text-xs leading-snug text-text-muted">@petrit-halabaku</div>
               </div>
               <a
                 href="https://linkedin.com/in/petrit-halabaku"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-border bg-surface-2 px-3 py-1.5 font-mono text-[11px] text-text-main no-underline transition-colors hover:border-cyan-brand hover:text-cyan-brand"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-surface-2 px-4 py-2.5 font-mono text-xs font-medium text-text-main no-underline transition-colors hover:border-cyan-brand hover:text-cyan-brand"
               >
                 Connect →
               </a>
@@ -158,11 +158,24 @@ export default function HomePage() {
               <LeafletMap />
             </div>
 
-            {/* Location */}
-            <div className="col-span-1 flex flex-col justify-center gap-2 rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover">
-              <div className="text-[26px] leading-none">🇽🇰</div>
-              <div className="text-sm font-semibold text-text-main">Prishtina</div>
-              <div className="font-mono text-[10px] text-text-muted">Kosovo · Remote OK</div>
+            {/* GitHub (replaces former location tile) */}
+            <div className="col-span-1 flex min-h-[158px] flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-6 transition-colors hover:border-border-hover">
+              <div className="flex flex-col gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-surface-2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" width="24" height="24" aria-hidden>
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                  </svg>
+                </div>
+                <div className="font-mono text-xs leading-snug text-text-muted">@Petrit-Halabaku</div>
+              </div>
+              <a
+                href="https://github.com/Petrit-Halabaku"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-surface-2 px-4 py-2.5 font-mono text-xs font-medium text-text-main no-underline transition-colors hover:border-cyan-brand hover:text-cyan-brand"
+              >
+                Follow →
+              </a>
             </div>
 
             {/* Stats — hidden (kept in DOM); outer wrapper avoids hidden+grid display conflict */}
@@ -181,26 +194,6 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* GitHub */}
-            <div className="col-span-1 flex min-h-[130px] flex-col justify-between rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-hover">
-              <div>
-                <div className="mb-3 flex h-[34px] w-[34px] items-center justify-center rounded-lg border border-border bg-surface-2">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" width="18" height="18">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                  </svg>
-                </div>
-                <div className="mb-2.5 font-mono text-[10px] text-text-muted">@Petrit-Halabaku</div>
-              </div>
-              <a
-                href="https://github.com/Petrit-Halabaku"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-border bg-surface-2 px-3 py-1.5 font-mono text-[11px] text-text-main no-underline transition-colors hover:border-cyan-brand hover:text-cyan-brand"
-              >
-                Follow →
-              </a>
             </div>
           </div>
         </div>

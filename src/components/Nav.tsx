@@ -16,7 +16,7 @@ export default function Nav() {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky top-0 z-[100] border-b border-border bg-[rgba(7,9,13,0.88)] backdrop-blur-xl">
+    <nav className="sticky top-0 z-[999] border-b border-border bg-[rgba(7,9,13,0.88)] backdrop-blur-xl">
       <div className="relative mx-auto flex h-14 max-w-max-page items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 no-underline">
