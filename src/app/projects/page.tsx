@@ -67,7 +67,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Card grid */}
-      <div className="animate-fade-up [animation-delay:0.2s] grid grid-cols-3 gap-4 max-md:grid-cols-2 max-[480px]:grid-cols-1">
+      <div className="animate-fade-up [animation-delay:0.2s] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {filtered.length === 0 ? (
           <div className="col-span-full py-[60px] text-center font-mono text-xs text-text-subtle">
             // no projects in this category

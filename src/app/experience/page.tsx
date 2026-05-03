@@ -131,14 +131,12 @@ export default function ExperiencePage() {
           <div className="mt-1 rounded-xl border border-border bg-surface p-5 text-center">
             <div className="mb-1.5 text-sm font-semibold text-text-main">Open to opportunities</div>
             <div className="mb-4 text-xs leading-[1.6] text-text-muted">Looking for full-time roles and freelance projects.</div>
-            <a
-              href="https://linkedin.com/in/petrit-halabaku"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-1.5 rounded-md border border-[rgba(0,212,255,0.22)] bg-cyan-dim px-[18px] py-2 font-mono text-[11px] text-cyan-brand no-underline transition-[background,border-color] duration-200 hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.14)]"
             >
               Get in touch →
-            </a>
+            </Link>
           </div>
         </div>
       </div>
