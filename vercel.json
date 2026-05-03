@@ -3,7 +3,7 @@
   "git": {
     "deploymentEnabled": {
       "master": true,
-      "main": false,
+      "main": true,
       "*": false
     }
   }
