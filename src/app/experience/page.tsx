@@ -1,168 +1,147 @@
 'use client'
 
 import Link from 'next/link'
+import { EDUCATION, formatEducationPeriod } from '@/src/data/education'
 import { EXPERIENCES, SKILLS } from '@/src/data/experiences'
 
-const chipStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 10,
-  color: 'var(--cyan)',
-  border: '1px solid rgba(0,212,255,0.18)',
-  borderRadius: 4,
-  padding: '2px 7px',
-  background: 'rgba(0,212,255,0.04)',
-}
+const CHIP_CLASS =
+  'rounded border border-[rgba(0,212,255,0.18)] bg-[rgba(0,212,255,0.04)] px-[7px] py-[2px] font-mono text-[10px] text-cyan-brand'
 
 export default function ExperiencePage() {
   return (
-    <main style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
+    <main className="relative z-[1] mx-auto max-w-max-page px-6 pb-20">
 
       {/* Page hero */}
-      <div className="fade-up" style={{ padding: '56px 0 36px', borderBottom: '1px solid var(--border)', marginBottom: 48 }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+      <div className="animate-fade-up mb-12 border-b border-border pb-9 pt-14 max-md:pb-7 max-md:pt-9">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ color: 'var(--text-3)' }}>//</span> career
+            <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+              <span className="text-text-subtle">//</span> career
             </div>
-            <h1 style={{ fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>Experience &amp; Skills</h1>
+            <h1 className="text-[28px] font-bold tracking-[-0.02em] text-text-main">Experience &amp; Skills</h1>
           </div>
           <Link
             href="/"
-            style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', textDecoration: 'none', marginTop: 8, transition: 'color 0.2s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-3)')}
+            className="mt-2 font-mono text-[11px] text-text-subtle no-underline transition-colors hover:text-cyan-brand"
           >
             ← back home
           </Link>
         </div>
-        <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.75, maxWidth: 500, marginTop: 10 }}>
-          6+ years building products across the stack — from pixel-perfect frontends to scalable APIs. Currently leading engineering at DCoding Labs in Chicago.
+        <p className="mt-2.5 max-w-[500px] text-sm leading-[1.75] text-text-muted">
+          7+ years building products across the stack — from pixel-perfect frontends to scalable APIs. Currently leading engineering at DCoding Labs in Chicago.
         </p>
       </div>
 
       {/* Two-column grid */}
-      <div className="fade-up delay-1 content-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 48, alignItems: 'start' }}>
+      <div className="animate-fade-up [animation-delay:0.1s] grid grid-cols-[1fr_280px] items-start gap-12 max-md:grid-cols-1">
 
         {/* Timeline */}
-        <div style={{ position: 'relative' }}>
+        <div className="relative">
           {/* Vertical line */}
-          <div style={{ position: 'absolute', left: 8, top: 8, bottom: 0, width: 1, background: 'linear-gradient(to bottom, var(--cyan) 0%, var(--border) 60%, transparent 100%)' }} />
+          <div className="absolute bottom-0 left-2 top-2 w-px bg-[linear-gradient(to_bottom,var(--color-cyan-brand)_0%,var(--color-border)_60%,transparent_100%)]" />
 
           {EXPERIENCES.map((exp, i) => (
             <div
               key={i}
-              className="timeline-item"
-              style={{ paddingLeft: 34, paddingBottom: i < EXPERIENCES.length - 1 ? 40 : 0, position: 'relative' }}
+              className={`timeline-item relative pl-[34px] ${i < EXPERIENCES.length - 1 ? 'pb-10' : ''}`}
             >
               {/* Dot */}
               <div
-                style={{
-                  position: 'absolute',
-                  left: 4,
-                  top: 7,
-                  width: 9,
-                  height: 9,
-                  borderRadius: '50%',
-                  background: 'var(--bg)',
-                  border: `2px solid ${i === 0 ? 'var(--cyan)' : 'var(--border-hover)'}`,
-                  boxShadow: i === 0 ? '0 0 10px rgba(0,212,255,0.45)' : 'none',
-                  transition: 'border-color 0.2s',
-                }}
+                className={`absolute left-1 top-[7px] h-[9px] w-[9px] rounded-full border-2 bg-bg transition-colors duration-200 ${
+                  i === 0
+                    ? 'border-cyan-brand shadow-[0_0_10px_rgba(0,212,255,0.45)]'
+                    : 'border-border-hover'
+                }`}
               />
 
-              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginBottom: 8 }}>
+              <div className="mb-2 flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.01em' }}>{exp.role}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', marginTop: 2 }}>{exp.company}</div>
+                  <div className="text-[15px] font-semibold tracking-[-0.01em] text-text-main">{exp.role}</div>
+                  <div className="mt-0.5 font-mono text-[11px] text-cyan-brand">{exp.company}</div>
                 </div>
-                <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)' }}>{exp.period}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)', marginTop: 2 }}>{exp.location}</div>
+                <div className="shrink-0 text-right">
+                  <div className="font-mono text-[10px] text-text-subtle">{exp.period}</div>
+                  <div className="mt-0.5 font-mono text-[10px] text-text-subtle">{exp.location}</div>
                 </div>
               </div>
 
-              <ul style={{ listStyle: 'none', marginTop: 10, display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <ul className="mt-2.5 flex list-none flex-col gap-1.5">
                 {exp.bullets.map((b, j) => (
-                  <li key={j} style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.7, paddingLeft: 14, position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: 0, color: 'var(--text-3)' }}>›</span>
+                  <li key={j} className="relative pl-3.5 text-[13px] leading-[1.7] text-text-muted">
+                    <span className="absolute left-0 text-text-subtle">›</span>
                     {b}
                   </li>
                 ))}
               </ul>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 10 }}>
-                {exp.tech.map(t => <span key={t} style={chipStyle}>{t}</span>)}
+              <div className="mt-2.5 flex flex-wrap gap-[5px]">
+                {exp.tech.map(t => <span key={t} className={CHIP_CLASS}>{t}</span>)}
               </div>
             </div>
           ))}
         </div>
 
         {/* Sidebar */}
-        <div className="fade-up delay-2" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 2, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ color: 'var(--text-3)' }}>//</span> capabilities
+        <div className="animate-fade-up [animation-delay:0.2s] flex flex-col gap-2.5">
+          <div className="mb-0.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+            <span className="text-text-subtle">//</span> capabilities
           </div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.01em', marginBottom: 6 }}>Skills</div>
+          <div className="mb-1.5 text-sm font-semibold tracking-[-0.01em] text-text-main">Skills</div>
 
           {SKILLS.map(s => (
             <div
               key={s.name}
-              style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: '14px 16px', transition: 'border-color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+              className="rounded-[10px] border border-border bg-surface px-4 py-3.5 transition-colors duration-200 hover:border-border-hover"
             >
-              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 3 }}>{s.name}</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)', lineHeight: 1.5 }}>{s.desc}</div>
+              <div className="mb-[3px] text-xs font-semibold text-text-main">{s.name}</div>
+              <div className="font-mono text-[10px] leading-[1.5] text-text-subtle">{s.desc}</div>
             </div>
           ))}
 
-          <div style={{ height: 1, background: 'var(--border)', margin: '8px 0' }} />
+          <div className="my-2 h-px bg-border" />
 
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 2, display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ color: 'var(--text-3)' }}>//</span> education
+          <div className="mb-0.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+            <span className="text-text-subtle">//</span> education
           </div>
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 10, padding: 16 }}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 2 }}>BSc Computer Science</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--cyan)', marginBottom: 4 }}>University of Prishtina</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--text-3)' }}>2014 – 2018</div>
-          </div>
+          {EDUCATION.map((edu, i) => (
+            <div
+              key={`${edu.institution}-${edu.periodFrom}-${edu.periodTo}`}
+              className={`rounded-[10px] border border-border bg-surface p-4 ${i < EDUCATION.length - 1 ? 'mb-2.5' : ''}`}
+            >
+              <div className="mb-0.5 text-[13px] font-semibold text-text-main">{edu.degree}</div>
+              <div className="mb-1 font-mono text-[10px] text-cyan-brand">{edu.institution}</div>
+              <div className="font-mono text-[10px] text-text-subtle">
+                {[formatEducationPeriod(edu), edu.location].filter(Boolean).join(' · ')}
+              </div>
+              {edu.details?.length ? (
+                <ul className="mt-2.5 flex list-none flex-col gap-1">
+                  {edu.details.map((d, j) => (
+                    <li key={j} className="relative pl-3 text-xs leading-[1.6] text-text-muted">
+                      <span className="absolute left-0 text-text-subtle">›</span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ))}
 
-          <div style={{ height: 1, background: 'var(--border)', margin: '8px 0' }} />
+          <div className="my-2 h-px bg-border" />
 
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: 20, textAlign: 'center', marginTop: 4 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>Open to opportunities</div>
-            <div style={{ fontSize: 12, color: 'var(--text-2)', marginBottom: 16, lineHeight: 1.6 }}>Looking for full-time roles and freelance projects.</div>
+          <div className="mt-1 rounded-xl border border-border bg-surface p-5 text-center">
+            <div className="mb-1.5 text-sm font-semibold text-text-main">Open to opportunities</div>
+            <div className="mb-4 text-xs leading-[1.6] text-text-muted">Looking for full-time roles and freelance projects.</div>
             <a
               href="https://linkedin.com/in/petrit-halabaku"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                background: 'var(--cyan-dim)',
-                border: '1px solid rgba(0,212,255,0.22)',
-                borderRadius: 6,
-                padding: '8px 18px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: 11,
-                color: 'var(--cyan)',
-                textDecoration: 'none',
-                transition: 'background 0.2s, border-color 0.2s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,212,255,0.14)'; e.currentTarget.style.borderColor = 'rgba(0,212,255,0.4)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'var(--cyan-dim)'; e.currentTarget.style.borderColor = 'rgba(0,212,255,0.22)' }}
+              className="inline-flex items-center gap-1.5 rounded-md border border-[rgba(0,212,255,0.22)] bg-cyan-dim px-[18px] py-2 font-mono text-[11px] text-cyan-brand no-underline transition-[background,border-color] duration-200 hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.14)]"
             >
               Get in touch →
             </a>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr !important; } }
-        @media (max-width: 768px) { main > div[style*="padding: '56px"] { padding: '36px 0 28px' !important; } }
-      `}</style>
     </main>
   )
 }

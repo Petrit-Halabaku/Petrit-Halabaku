@@ -9,6 +9,7 @@ const LINKS = [
   { href: '/', label: 'home' },
   { href: '/projects', label: 'projects' },
   { href: '/experience', label: 'experience' },
+  { href: '/contact', label: 'contact' },
 ]
 
 export default function Nav() {
@@ -16,72 +17,34 @@ export default function Nav() {
   const pathname = usePathname()
 
   return (
-    <nav
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        background: 'rgba(7,9,13,0.88)',
-        borderBottom: '1px solid var(--border)',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 'var(--max-w)',
-          margin: '0 auto',
-          padding: '0 24px',
-          height: 56,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'relative',
-        }}
-      >
+    <nav className="sticky top-0 z-[999] border-b border-border bg-[rgba(7,9,13,0.88)] backdrop-blur-xl">
+      <div className="relative mx-auto flex h-14 max-w-max-page items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <Link href="/" className="flex items-center gap-2.5 no-underline">
           <Image
             src="/uploads/logo-white.png"
             alt="PH"
             width={30}
             height={30}
-            style={{ height: 30, width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.9 }}
+            className="w-auto opacity-90 brightness-100"
           />
         </Link>
 
         {/* Desktop links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 28 }} className="nav-links-desktop">
+        <div className="nav-links-desktop flex items-center gap-7 max-sm:hidden">
           {LINKS.map(({ href, label }) => {
             const active = pathname === href
             return (
               <Link
                 key={href}
                 href={href}
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 11,
-                  color: active ? 'var(--text)' : 'var(--text-2)',
-                  textDecoration: 'none',
-                  letterSpacing: '0.06em',
-                  textTransform: 'lowercase',
-                  position: 'relative',
-                  transition: 'color 0.2s',
-                  whiteSpace: 'nowrap',
-                }}
+                className={`relative whitespace-nowrap font-mono text-[11px] lowercase tracking-[0.06em] no-underline transition-colors ${
+                  active ? 'text-text-main' : 'text-text-muted'
+                }`}
               >
                 {label}
                 {active && (
-                  <span
-                    style={{
-                      position: 'absolute',
-                      bottom: -4,
-                      left: 0,
-                      right: 0,
-                      height: 1,
-                      background: 'var(--cyan)',
-                    }}
-                  />
+                  <span className="absolute -bottom-1 left-0 right-0 h-px bg-cyan-brand" />
                 )}
               </Link>
             )
@@ -90,25 +53,7 @@ export default function Nav() {
             href="https://linkedin.com/in/petrit-halabaku"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              background: 'var(--cyan-dim)',
-              border: '1px solid rgba(0,212,255,0.2)',
-              borderRadius: 6,
-              padding: '5px 12px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              color: 'var(--cyan)',
-              textDecoration: 'none',
-              transition: 'background 0.2s, border-color 0.2s',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(0,212,255,0.14)'
-              e.currentTarget.style.borderColor = 'rgba(0,212,255,0.4)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'var(--cyan-dim)'
-              e.currentTarget.style.borderColor = 'rgba(0,212,255,0.2)'
-            }}
+            className="rounded-md border border-[rgba(0,212,255,0.2)] bg-cyan-dim px-3 py-[5px] font-mono text-[11px] text-cyan-brand no-underline transition-[background,border-color] duration-200 hover:border-[rgba(0,212,255,0.4)] hover:bg-[rgba(0,212,255,0.14)]"
           >
             hire me →
           </a>
@@ -118,27 +63,13 @@ export default function Nav() {
         <button
           onClick={() => setOpen(o => !o)}
           aria-label="menu"
-          className="nav-burger-btn"
-          style={{
-            display: 'none',
-            flexDirection: 'column',
-            gap: 5,
-            cursor: 'pointer',
-            background: 'none',
-            border: 'none',
-            padding: 6,
-          }}
+          className="nav-burger-btn hidden cursor-pointer flex-col gap-[5px] border-none bg-transparent p-1.5 max-sm:flex"
         >
           {[0, 1, 2].map(i => (
             <span
               key={i}
+              className="block h-[1.5px] w-[22px] rounded-sm bg-text-muted transition-all duration-200"
               style={{
-                display: 'block',
-                width: 22,
-                height: 1.5,
-                background: 'var(--text-2)',
-                borderRadius: 2,
-                transition: 'all 0.2s',
                 transform:
                   open && i === 0
                     ? 'translateY(6.5px) rotate(45deg)'
@@ -154,66 +85,33 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'absolute',
-            top: 56,
-            left: 0,
-            right: 0,
-            background: 'rgba(13,17,23,0.98)',
-            backdropFilter: 'blur(24px)',
-            borderBottom: '1px solid var(--border)',
-            zIndex: 99,
-          }}
-        >
-          {LINKS.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              style={{
-                padding: '14px 24px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: 12,
-                color: pathname === href ? 'var(--cyan)' : 'var(--text-2)',
-                textDecoration: 'none',
-                borderBottom: '1px solid var(--border)',
-                transition: 'color 0.2s, background 0.2s',
-                letterSpacing: '0.06em',
-                background: pathname === href ? 'rgba(0,212,255,0.04)' : 'transparent',
-              }}
-            >
-              {label}
-            </Link>
-          ))}
+        <div className="absolute left-0 right-0 top-14 z-[99] flex flex-col border-b border-border bg-[rgba(13,17,23,0.98)] backdrop-blur-xl">
+          {LINKS.map(({ href, label }) => {
+            const active = pathname === href
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className={`border-b border-border px-6 py-3.5 font-mono text-xs tracking-[0.06em] no-underline transition-[color,background] duration-200 ${
+                  active ? 'bg-[rgba(0,212,255,0.04)] text-cyan-brand' : 'text-text-muted'
+                }`}
+              >
+                {label}
+              </Link>
+            )
+          })}
           <a
             href="https://linkedin.com/in/petrit-halabaku"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            style={{
-              padding: '14px 24px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 12,
-              color: 'var(--text-2)',
-              textDecoration: 'none',
-              transition: 'color 0.2s, background 0.2s',
-              letterSpacing: '0.06em',
-            }}
+            className="px-6 py-3.5 font-mono text-xs tracking-[0.06em] text-text-muted no-underline transition-[color,background] duration-200"
           >
             hire me
           </a>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 640px) {
-          .nav-links-desktop { display: none !important; }
-          .nav-burger-btn { display: flex !important; }
-        }
-      `}</style>
     </nav>
   )
 }

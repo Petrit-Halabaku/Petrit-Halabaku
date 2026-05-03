@@ -1,17 +1,10 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import { type Project, fmt } from '@/src/data/projects'
 
-const TAG_STYLE: React.CSSProperties = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 10,
-  color: 'var(--text-3)',
-  border: '1px solid var(--border)',
-  borderRadius: 4,
-  padding: '2px 7px',
-  letterSpacing: '0.03em',
-}
+const TAG_CLASS =
+  'rounded border border-border px-[7px] py-[2px] font-mono text-[10px] tracking-[0.03em] text-text-subtle'
 
 interface Props {
   project: Project
@@ -33,60 +26,29 @@ export default function ProjectRow({ project, previewRef, previewImgRef }: Props
 
   return (
     <div
-      style={{
-        borderTop: '1px solid var(--border)',
-        transition: 'background 0.15s',
-        cursor: 'pointer',
-      }}
+      className="cursor-pointer border-t border-border bg-transparent transition-colors duration-150 hover:bg-[rgba(255,255,255,0.018)]"
       onClick={() => setOpen(o => !o)}
-      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.018)')}
-      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '120px 1fr auto',
-          gap: 20,
-          alignItems: 'start',
-          padding: '18px 10px',
-        }}
-        className="project-row-inner"
-      >
-        <div
-          className="project-date"
-          style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', paddingTop: 3, whiteSpace: 'nowrap' }}
-        >
+      <div className="grid grid-cols-[120px_1fr_auto] items-start gap-5 px-2.5 py-[18px] max-sm:grid-cols-[1fr_auto]">
+        <div className="whitespace-nowrap pt-[3px] font-mono text-[11px] text-text-subtle max-sm:hidden">
           {fmt(project.date)}
         </div>
         <div onMouseEnter={onEnter} onMouseLeave={onLeave}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
-            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', letterSpacing: '-0.01em' }}>
+          <div className="mb-[3px] flex items-center gap-2">
+            <span className="text-[15px] font-semibold tracking-[-0.01em] text-text-main">
               {project.title}
             </span>
           </div>
-          <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6 }}>{project.desc}</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 8 }}>
+          <div className="text-[13px] leading-[1.6] text-text-muted">{project.desc}</div>
+          <div className="mt-2 flex flex-wrap gap-[5px]">
             {project.tech.map(t => (
-              <span key={t} style={TAG_STYLE}>{t}</span>
+              <span key={t} className={TAG_CLASS}>{t}</span>
             ))}
           </div>
         </div>
         <button
-          style={{
-            background: 'var(--surface-2)',
-            border: '1px solid var(--border)',
-            borderRadius: 6,
-            width: 28,
-            height: 28,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            color: 'var(--text-2)',
-            transition: 'border-color 0.2s, color 0.2s, transform 0.2s',
-            flexShrink: 0,
-            transform: open ? 'rotate(180deg)' : 'none',
-          }}
+          className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-border bg-surface-2 text-text-muted transition-[border-color,color,transform] duration-200"
+          style={{ transform: open ? 'rotate(180deg)' : 'none' }}
           onClick={e => { e.stopPropagation(); setOpen(o => !o) }}
           aria-label="expand"
         >
@@ -98,51 +60,17 @@ export default function ProjectRow({ project, previewRef, previewImgRef }: Props
 
       {open && (
         <div
-          style={{
-            margin: '0 10px 16px',
-            padding: '14px 16px',
-            background: 'var(--surface-2)',
-            border: '1px solid var(--border)',
-            borderRadius: 8,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 16,
-            flexWrap: 'wrap',
-          }}
+          className="mx-2.5 mb-4 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-border bg-surface-2 px-4 py-3.5"
           onClick={e => e.stopPropagation()}
         >
-          <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.75, flex: 1, minWidth: 180 }}>
+          <p className="min-w-[180px] flex-1 text-[13px] leading-[1.75] text-text-muted">
             {project.desc}
           </p>
           <a
             href={project.live}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              background: 'var(--cyan-dim)',
-              border: '1px solid rgba(0,212,255,0.22)',
-              borderRadius: 6,
-              padding: '8px 16px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              color: 'var(--cyan)',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-              transition: 'background 0.2s, border-color 0.2s',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(0,212,255,0.14)'
-              e.currentTarget.style.borderColor = 'rgba(0,212,255,0.45)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'var(--cyan-dim)'
-              e.currentTarget.style.borderColor = 'rgba(0,212,255,0.22)'
-            }}
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md border border-[rgba(0,212,255,0.22)] bg-cyan-dim px-4 py-2 font-mono text-[11px] text-cyan-brand no-underline transition-[background,border-color] duration-200 hover:border-[rgba(0,212,255,0.45)] hover:bg-[rgba(0,212,255,0.14)]"
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -153,13 +81,6 @@ export default function ProjectRow({ project, previewRef, previewImgRef }: Props
           </a>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 640px) {
-          .project-row-inner { grid-template-columns: 1fr auto !important; }
-          .project-date { display: none !important; }
-        }
-      `}</style>
     </div>
   )
 }

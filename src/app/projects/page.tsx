@@ -20,75 +20,62 @@ export default function ProjectsPage() {
   const filtered = filter === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === filter)
 
   return (
-    <main style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 24px 80px', position: 'relative', zIndex: 1 }}>
+    <main className="relative z-[1] mx-auto max-w-max-page px-6 pb-20">
 
       {/* Page hero */}
-      <div className="fade-up" style={{ padding: '56px 0 36px', borderBottom: '1px solid var(--border)', marginBottom: 40 }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+      <div className="animate-fade-up mb-10 border-b border-border pb-9 pt-14">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--cyan)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ color: 'var(--text-3)' }}>//</span> portfolio
+            <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-brand">
+              <span className="text-text-subtle">//</span> portfolio
             </div>
-            <h1 style={{ fontSize: 28, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em' }}>All Projects</h1>
+            <h1 className="text-[28px] font-bold tracking-[-0.02em] text-text-main">All Projects</h1>
           </div>
           <Link
             href="/"
-            style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', textDecoration: 'none', marginTop: 8, transition: 'color 0.2s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-3)')}
+            className="mt-2 font-mono text-[11px] text-text-subtle no-underline transition-colors hover:text-cyan-brand"
           >
             ← back home
           </Link>
         </div>
-        <p style={{ fontSize: 14, color: 'var(--text-2)', lineHeight: 1.75, maxWidth: 500, marginTop: 10 }}>
+        <p className="mt-2.5 max-w-[500px] text-sm leading-[1.75] text-text-muted">
           Projects built across e-commerce, health data, geo-mapping, and deep tech. Hover any card to see the live link.
         </p>
       </div>
 
       {/* Filter */}
-      <div className="fade-up delay-1" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 32 }}>
-        {CATEGORIES.map(c => (
-          <button
-            key={c}
-            onClick={() => setFilter(c)}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              color: filter === c ? 'var(--cyan)' : 'var(--text-2)',
-              background: filter === c ? 'var(--cyan-dim)' : 'var(--surface)',
-              border: `1px solid ${filter === c ? 'var(--cyan)' : 'var(--border)'}`,
-              borderRadius: 6,
-              padding: '6px 14px',
-              cursor: 'pointer',
-              transition: 'border-color 0.2s, color 0.2s, background 0.2s',
-            }}
-          >
-            {c}
-          </button>
-        ))}
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-3)', display: 'flex', alignItems: 'center', marginLeft: 8 }}>
+      <div className="animate-fade-up [animation-delay:0.1s] mb-8 flex flex-wrap gap-1.5">
+        {CATEGORIES.map(c => {
+          const active = filter === c
+          return (
+            <button
+              key={c}
+              onClick={() => setFilter(c)}
+              className={`cursor-pointer rounded-md border px-3.5 py-1.5 font-mono text-[11px] transition-[border-color,color,background] duration-200 ${
+                active
+                  ? 'border-cyan-brand bg-cyan-dim text-cyan-brand'
+                  : 'border-border bg-surface text-text-muted'
+              }`}
+            >
+              {c}
+            </button>
+          )
+        })}
+        <span className="ml-2 flex items-center font-mono text-[11px] text-text-subtle">
           {filtered.length} project{filtered.length !== 1 ? 's' : ''}
         </span>
       </div>
 
       {/* Card grid */}
-      <div
-        className="fade-up delay-2 cards-grid"
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}
-      >
+      <div className="animate-fade-up [animation-delay:0.2s] grid grid-cols-3 gap-4 max-md:grid-cols-2 max-[480px]:grid-cols-1">
         {filtered.length === 0 ? (
-          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '60px 0', fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-3)' }}>
+          <div className="col-span-full py-[60px] text-center font-mono text-xs text-text-subtle">
             // no projects in this category
           </div>
         ) : (
           filtered.map(p => <ProjectCard key={p.id} project={p} />)
         )}
       </div>
-
-      <style>{`
-        @media (max-width: 768px) { .cards-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 480px) { .cards-grid { grid-template-columns: 1fr !important; } }
-      `}</style>
     </main>
   )
 }

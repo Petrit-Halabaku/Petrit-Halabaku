@@ -1,78 +1,233 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #07090d;
-  --surface: #0d1117;
-  --surface-2: #131921;
-  --border: #1c2332;
-  --border-hover: #2a3550;
-  --text: #dce6f5;
-  --text-2: #7a8ba8;
-  --text-3: #3d4f6a;
-  --cyan: #00d4ff;
-  --cyan-dim: rgba(0, 212, 255, 0.08);
-  --cyan-glow: rgba(0, 212, 255, 0.2);
-  --green: #00e57b;
-  --green-dim: rgba(0, 229, 123, 0.1);
-  --max-w: 900px;
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@theme {
+  --color-bg: #07090d;
+  --color-surface: #0d1117;
+  --color-surface-2: #131921;
+  --color-border: #1c2332;
+  --color-border-hover: #2a3550;
 
-html { scroll-behavior: smooth; }
+  --color-text-main: #dce6f5;
+  --color-text-muted: #7a8ba8;
+  --color-text-subtle: #3d4f6a;
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
+  --color-cyan-brand: #00d4ff;
+  --color-cyan-dim: rgba(0, 212, 255, 0.08);
+  --color-cyan-glow: rgba(0, 212, 255, 0.2);
+
+  --color-green-brand: #00e57b;
+  --color-green-dim: rgba(0, 229, 123, 0.1);
+
+  --spacing-max-page: 900px;
+
+  --animate-fade-up: fadeUp 0.5s ease both;
+  --animate-blink: blink 1.1s step-end infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-badge-pulse: badge-pulse 2.2s ease-in-out infinite;
 }
 
-/* Dot-grid background */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, #1c2840 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, #1c2840 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      transparent 50%,
+      rgba(7, 9, 13, 0.7) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  ::selection {
+    background: var(--color-cyan-glow);
+    color: var(--color-cyan-brand);
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-hover);
+    border-radius: 2px;
+  }
 }
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(7, 9, 13, 0.7) 100%);
-  pointer-events: none;
-  z-index: 0;
+
+@layer components {
+  /* MapLibre mini map canvas — match legacy Leaflet OSM grading */
+  .mini-map-globe canvas {
+    filter: brightness(0.82) saturate(0.75);
+  }
+
+  .mini-map-globe .maplibregl-canvas-container {
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  /* react-activity-calendar — HUD tooltip aligned with bento / CursorGlow palette */
+  .react-activity-calendar__tooltip {
+    white-space: pre-line;
+    z-index: 20000 !important;
+
+    width: max-content !important;
+    max-width: min(calc(100vw - 20px), 15rem);
+
+    padding: 0.5rem 0.72rem !important;
+    border-radius: 10px !important;
+
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.52;
+    letter-spacing: 0.04em;
+
+    color: var(--color-text-main) !important;
+    border: 1px solid
+      color-mix(in srgb, var(--color-border-hover) 88%, var(--color-cyan-brand) 28%) !important;
+    background-color: color-mix(
+      in srgb,
+      var(--color-surface-2) 96%,
+      var(--color-surface)
+    ) !important;
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+
+    box-shadow:
+      0 0 0 1px rgba(0, 212, 255, 0.1),
+      0 0 24px rgba(0, 212, 255, 0.06),
+      0 16px 42px rgba(7, 9, 13, 0.55),
+      inset 0 1px 0 rgba(220, 230, 245, 0.07),
+      inset 0 -1px 0 rgba(0, 229, 123, 0.05);
+
+    isolation: isolate;
+  }
+
+  /* Calendar uses colorScheme="dark"; library inverts tooltip to paper-white — revert to themed dark HUD */
+  .react-activity-calendar__tooltip[data-color-scheme='dark'] {
+    color: var(--color-text-main) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--color-border-hover) 88%,
+        var(--color-cyan-brand) 28%
+      )
+      !important;
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-2) 96%,
+        var(--color-surface)
+      )
+      !important;
+  }
+
+  .react-activity-calendar__tooltip[data-color-scheme='light'] {
+    color: var(--color-text-main) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--color-border-hover) 88%,
+        var(--color-cyan-brand) 28%
+      )
+      !important;
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-2) 96%,
+        var(--color-surface)
+      )
+      !important;
+  }
+
+  .react-activity-calendar__tooltip-arrow,
+  .react-activity-calendar__tooltip[data-color-scheme='dark'] .react-activity-calendar__tooltip-arrow,
+  .react-activity-calendar__tooltip[data-color-scheme='light'] .react-activity-calendar__tooltip-arrow {
+    fill: var(--color-surface-2) !important;
+  }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 2px; }
-::selection { background: var(--cyan-glow); color: var(--cyan); }
-
-/* Leaflet override */
-.leaflet-tile { filter: brightness(0.82) saturate(0.75); }
-
-/* Animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.5); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.fade-up { animation: fadeUp 0.5s ease both; }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.45s; }
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes badge-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(0 229 123 / 0%);
+    border-color: rgb(0 229 123 / 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 18px 1px rgb(0 229 123 / 0.22);
+    border-color: rgb(0 229 123 / 0.52);
+  }
+}
