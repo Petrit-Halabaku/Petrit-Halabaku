@@ -165,20 +165,22 @@ export default function HomePage() {
               <div className="font-mono text-[10px] text-text-muted">Kosovo · Remote OK</div>
             </div>
 
-            {/* Stats */}
-            <div className="col-span-4 grid grid-cols-3 rounded-xl border border-border bg-surface transition-colors hover:border-border-hover max-sm:col-span-2">
-              {[
-                { num: '7', em: '+', desc: 'years experience' },
-                { num: '6', em: '+', desc: 'shipped projects' },
-                { num: '4', em: '', desc: 'companies' },
-              ].map(({ num, em, desc }) => (
-                <div key={desc} className="px-5 py-4 border-r border-border last:border-r-0">
-                  <div className="font-mono text-[26px] font-semibold leading-none text-text-main">
-                    {num}<em className="not-italic text-cyan-brand">{em}</em>
+            {/* Stats — hidden (kept in DOM); outer wrapper avoids hidden+grid display conflict */}
+            <div className="hidden col-span-4 max-sm:col-span-2">
+              <div className="grid grid-cols-3 rounded-xl border border-border bg-surface transition-colors hover:border-border-hover">
+                {[
+                  { num: '7', em: '+', desc: 'years experience' },
+                  { num: '6', em: '+', desc: 'shipped projects' },
+                  { num: '4', em: '', desc: 'companies' },
+                ].map(({ num, em, desc }) => (
+                  <div key={desc} className="px-5 py-4 border-r border-border last:border-r-0">
+                    <div className="font-mono text-[26px] font-semibold leading-none text-text-main">
+                      {num}<em className="not-italic text-cyan-brand">{em}</em>
+                    </div>
+                    <div className="mt-1 text-[11px] text-text-muted">{desc}</div>
                   </div>
-                  <div className="mt-1 text-[11px] text-text-muted">{desc}</div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* GitHub */}

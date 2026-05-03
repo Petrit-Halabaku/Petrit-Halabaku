@@ -1,62 +1,74 @@
-import { memo } from 'react'
+'use client'
 
-const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-const CONTRIB_COLORS = ['#161b22', '#0d3d2e', '#006d40', '#26a641', '#39d353']
+import { useEffect, useMemo, useState } from 'react'
+import { ActivityCalendar, type Activity, type ThemeInput } from 'react-activity-calendar'
 
-const CONTRIB_DATA = (() => {
+const THEME: ThemeInput = {
+  dark: ['#161b22', '#0d3d2e', '#006d40', '#26a641', '#39d353'],
+  light: ['#161b22', '#0d3d2e', '#006d40', '#26a641', '#39d353'],
+}
+
+const USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'Petrit-Halabaku'
+const MONTHS = 10
+
+function rangeStart(): Date {
+  const d = new Date()
+  d.setMonth(d.getMonth() - MONTHS)
+  return d
+}
+
+function buildFallback(start: Date): Activity[] {
   let s = 42
   const lcg = (n: number) => (n * 1664525 + 1013904223) & 0xffffffff
-  return Array.from({ length: 52 * 7 }, () => {
+  const today = new Date()
+  const days = Math.floor((today.getTime() - start.getTime()) / 86400000) + 1
+  return Array.from({ length: days }, (_, i) => {
     s = lcg(s)
     const r = (s >>> 0) / 0xffffffff
-    return r < 0.48 ? 0 : r < 0.62 ? 1 : r < 0.76 ? 2 : r < 0.88 ? 3 : 4
+    const level = r < 0.48 ? 0 : r < 0.62 ? 1 : r < 0.76 ? 2 : r < 0.88 ? 3 : 4
+    const d = new Date(start)
+    d.setDate(start.getDate() + i)
+    return {
+      date: d.toISOString().slice(0, 10),
+      count: level === 0 ? 0 : level * 2,
+      level,
+    }
   })
-})()
+}
 
-const ContribGraph = memo(function ContribGraph() {
-  const today = new Date()
-  const monthLabels: { w: number; label: string }[] = []
-  for (let w = 0; w < 52; w++) {
-    const d = new Date(today)
-    d.setDate(d.getDate() - (51 - w) * 7)
-    if (d.getDate() <= 7) monthLabels.push({ w, label: MONTH_NAMES[d.getMonth()] })
-  }
+export default function ContribGraph() {
+  const start = useMemo(rangeStart, [])
+  const [data, setData] = useState<Activity[] | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    const startStr = start.toISOString().slice(0, 10)
+    fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`)
+      .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((json: { contributions: Activity[] }) => {
+        if (cancelled) return
+        setData(json.contributions.filter(c => c.date >= startStr))
+      })
+      .catch(() => {
+        if (!cancelled) setData(buildFallback(start))
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [start])
 
   return (
-    <div>
-      <div className="relative mb-1 h-3.5">
-        {monthLabels.map(({ w, label }) => (
-          <span
-            key={w}
-            className="absolute font-mono text-[9px] text-text-subtle"
-            style={{ left: w * 13 }}
-          >
-            {label}
-          </span>
-        ))}
-      </div>
-      <div className="flex gap-0.5">
-        {Array.from({ length: 52 }, (_, w) => (
-          <div key={w} className="flex flex-col gap-0.5">
-            {Array.from({ length: 7 }, (_, d) => (
-              <div
-                key={d}
-                className="h-[11px] w-[11px] shrink-0 rounded-sm"
-                style={{ background: CONTRIB_COLORS[CONTRIB_DATA[w * 7 + d]] }}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 flex items-center justify-end gap-1">
-        <span className="font-mono text-[9px] text-text-subtle">Less</span>
-        {CONTRIB_COLORS.map((c, i) => (
-          <div key={i} className="h-2.5 w-2.5 rounded-sm" style={{ background: c }} />
-        ))}
-        <span className="font-mono text-[9px] text-text-subtle">More</span>
-      </div>
-    </div>
+    <ActivityCalendar
+      data={data ?? []}
+      loading={!data}
+      theme={THEME}
+      colorScheme="dark"
+      blockSize={11}
+      blockMargin={2}
+      blockRadius={2}
+      fontSize={10}
+      showTotalCount={false}
+      labels={{ legend: { less: 'Less', more: 'More' } }}
+    />
   )
-})
-
-export default ContribGraph
+}
