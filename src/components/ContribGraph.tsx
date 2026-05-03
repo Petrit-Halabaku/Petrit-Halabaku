@@ -1,6 +1,13 @@
 'use client'
 
-import { cloneElement, useEffect, useMemo, useState, type SVGProps } from 'react'
+import {
+  cloneElement,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+  type SVGProps,
+} from 'react'
 import { ActivityCalendar, type Activity, type ThemeInput } from 'react-activity-calendar'
 import 'react-activity-calendar/tooltips.css'
 
@@ -10,12 +17,39 @@ const THEME: ThemeInput = {
 }
 
 const USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME ?? 'Petrit-Halabaku'
-const MONTHS = 10
 
-function rangeStart(): Date {
+/** Aligns with Tailwind `sm` (640px): narrower viewports show a shorter history. */
+const CONTRIB_NARROW_MQ = '(max-width: 639px)'
+const MONTHS_NARROW = 8
+const MONTHS_WIDE = 10
+
+function rangeStart(months: number): Date {
   const d = new Date()
-  d.setMonth(d.getMonth() - MONTHS)
+  d.setMonth(d.getMonth() - months)
   return d
+}
+
+function subscribeNarrowContrib(onChange: () => void) {
+  const mq = window.matchMedia(CONTRIB_NARROW_MQ)
+  mq.addEventListener('change', onChange)
+  return () => mq.removeEventListener('change', onChange)
+}
+
+function getNarrowContribSnapshot() {
+  return window.matchMedia(CONTRIB_NARROW_MQ).matches
+}
+
+function getServerNarrowContribSnapshot() {
+  return false
+}
+
+function useContributionMonths(): number {
+  const narrow = useSyncExternalStore(
+    subscribeNarrowContrib,
+    getNarrowContribSnapshot,
+    getServerNarrowContribSnapshot,
+  )
+  return narrow ? MONTHS_NARROW : MONTHS_WIDE
 }
 
 function utcDate(dateStr: string): Date {
@@ -62,26 +96,30 @@ function buildFallback(start: Date): Activity[] {
   })
 }
 
-const SKELETON_WEEKS = 44
 const SKELETON_DAYS = 7
 const BLOCK_SIZE = 11
 const BLOCK_MARGIN = 2
 
-function ContribSkeleton() {
+function skeletonWeeksForMonths(months: number) {
+  return Math.min(52, Math.max(32, Math.ceil(months * 4.35)))
+}
+
+function ContribSkeleton({ months }: { months: number }) {
+  const skeletonWeeks = skeletonWeeksForMonths(months)
   const blocks = useMemo(() => {
     let s = 1337
     const lcg = () => (s = (s * 1664525 + 1013904223) & 0xffffffff)
-    return Array.from({ length: SKELETON_WEEKS * SKELETON_DAYS }, () => {
+    return Array.from({ length: skeletonWeeks * SKELETON_DAYS }, () => {
       const r = (lcg() >>> 0) / 0xffffffff
       const level = r < 0.55 ? 0 : r < 0.72 ? 1 : r < 0.86 ? 2 : r < 0.95 ? 3 : 4
       return level
     })
-  }, [])
+  }, [skeletonWeeks])
 
   return (
     <div className="contrib-skeleton" aria-hidden>
       <div className="contrib-skeleton__months">
-        {Array.from({ length: 10 }).map((_, i) => (
+        {Array.from({ length: months }).map((_, i) => (
           <span key={i} className="contrib-skeleton__month-tick" />
         ))}
       </div>
@@ -94,10 +132,10 @@ function ContribSkeleton() {
           ))}
         </div>
         <div className="contrib-skeleton__grid">
-          {Array.from({ length: SKELETON_WEEKS }).map((_, w) => (
+          {Array.from({ length: skeletonWeeks }).map((_, w) => (
             <div key={w} className="contrib-skeleton__col">
               {Array.from({ length: SKELETON_DAYS }).map((_, d) => {
-                const level = blocks[w * SKELETON_DAYS + d]
+                const level = blocks[w * SKELETON_DAYS + d] ?? 0
                 return (
                   <span
                     key={d}
@@ -247,7 +285,8 @@ function ContribSkeleton() {
 }
 
 export default function ContribGraph() {
-  const start = useMemo(rangeStart, [])
+  const months = useContributionMonths()
+  const start = useMemo(() => rangeStart(months), [months])
   const [data, setData] = useState<Activity[] | null>(null)
   const dayFormatter = useMemo(
     () =>
@@ -263,6 +302,7 @@ export default function ContribGraph() {
 
   useEffect(() => {
     let cancelled = false
+    setData(null)
     const startStr = start.toISOString().slice(0, 10)
     fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`)
       .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
@@ -278,7 +318,7 @@ export default function ContribGraph() {
     }
   }, [start])
 
-  if (!data) return <ContribSkeleton />
+  if (!data) return <ContribSkeleton months={months} />
 
   return (
     <ActivityCalendar
