@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRef, useState, type FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import emailjs from '@emailjs/browser'
 
 type SubmitStatus = 'idle' | 'success' | 'error'
@@ -18,6 +19,7 @@ const LABEL_CLASS =
 const ERROR_CLASS = 'mt-1.5 font-mono text-[10px] text-[#ff6a6a]'
 
 export default function ContactPage() {
+  const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle')
   const [pending, setPending] = useState(false)
@@ -38,7 +40,7 @@ export default function ContactPage() {
     }
 
     const name = String(data.get('from_name') ?? '').trim()
-    const email = String(data.get('email') ?? '').trim()
+    const email = String(data.get('reply_to') ?? '').trim()
     const message = String(data.get('message') ?? '').trim()
 
     const nextErrors: FieldErrors = {}
@@ -62,6 +64,7 @@ export default function ContactPage() {
       )
       form.reset()
       setSubmitStatus('success')
+      setTimeout(() => router.push('/'), 2000)
     } catch (error) {
       console.error('Error sending email:', error)
       setSubmitStatus('error')
@@ -120,7 +123,7 @@ export default function ContactPage() {
             </label>
             <input
               id="name"
-              name="name"
+              name="from_name"
               type="text"
               required
               minLength={2}
@@ -138,7 +141,7 @@ export default function ContactPage() {
             </label>
             <input
               id="email"
-              name="email"
+              name="reply_to"
               type="email"
               required
               autoComplete="email"
